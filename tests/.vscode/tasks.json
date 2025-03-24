@@ -1,0 +1,163 @@
+{
+    "version": "2.0.0",
+    "shell":{
+        "task": true
+    },
+    "windows": {
+        "options": {
+          "shell": {
+            "executable": "cmd.exe",
+            "args": [
+              "/C",
+              // The path to VsDevCmd.bat depends on the version of Visual Studio you have installed.
+              "\"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/Tools/VsDevCmd.bat\"",
+              "&&"
+            ]
+          }
+        }
+      },
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "cl.exe build active file",
+            "command": "cl.exe",
+            "args": [
+              "/Zi",
+              "/EHsc",
+              "/Fe:",
+              "${fileDirname}\\${fileBasenameNoExtension}.exe",
+              "${file}"
+            ],
+            "problemMatcher": ["$msCompile"],
+            "group": {
+              "kind": "build",
+              "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "Build RELEASE",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "command": "make release -j",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                  "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                  "file": 1,
+                  "line": 2,
+                  "column": 3,
+                  "severity": 4,
+                  "message": 5
+                }
+              }
+        },
+        {
+            "type": "shell",
+            "label": "Build DEBUG",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "command": "make debug -j || exit 1",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                  "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                  "file": 1,
+                  "line": 2,
+                  "column": 3,
+                  "severity": 4,
+                  "message": 5
+                }
+              }
+        },
+        {
+            "type": "shell",
+            "label": "Clean DEBUG",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "command": "make clean",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                  "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                  "file": 1,
+                  "line": 2,
+                  "column": 3,
+                  "severity": 4,
+                  "message": 5
+                }
+              }
+        },
+        {
+            "type": "shell",
+            "label": "Clean RELEASE",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "command": "make clean",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                  "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                  "file": 1,
+                  "line": 2,
+                  "column": 3,
+                  "severity": 4,
+                  "message": 5
+                }
+              }
+        },
+        {
+            "type": "shell",
+            "label": "Clean ALL",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "command": "make clean",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                  "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                  "file": 1,
+                  "line": 2,
+                  "column": 3,
+                  "severity": 4,
+                  "message": 5
+                }
+              }
+         }
+    ]
+}
