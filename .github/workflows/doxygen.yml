@@ -1,0 +1,25 @@
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  documentation:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Doxygen
+        run: sudo apt install -y doxygen
+
+      - name: Generate Documentation
+        run: doxygen docs/Doxyfile
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: docs/
+          branch: gh-pages
+          target-folder: docs/
